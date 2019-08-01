@@ -1,37 +1,13 @@
-Welcome to Glitch
+Type Experiments with PoseNet and PIXI
 =================
+![Touching Type](https://cdn.glitch.com/2265e14a-84d1-435d-b7d7-6cf94be2325b%2Fhands.gif)
+<!-- ![Intro to PoseNet](https://cdn.glitch.com/2265e14a-84d1-435d-b7d7-6cf94be2325b%2Fintro.gif)
+ -->
+An interactive type projection that utilizes simple body tracking from [Posenet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
+and the Reynolds Flocking algorithm [example](https://thecodingtrain.com/CodingChallenges/124-flocking-boids.html) by the Coding Train.
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+VER 2 now made with Pixi.js for better performance!
+===============
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
-
-Find out more [about Glitch](https://glitch.com/about).
-
-
-Your Project
-------------
-
-### ← README.md
-
-That's this file, where you can tell people what your cool website does and how you built it.
-
-### ← index.html
-
-Where you'll write the content of your website. 
-
-### ← style.css
-
-CSS files add styling rules to your content.
-
-### ← script.js
-
-If you're feeling fancy you can add interactivity to your site with JavaScript.
-
-### ← assets
-
-Drag in `assets`, like images or music, to add them to your project
-
-Made by [Glitch](https://glitch.com/)
--------------------
-
-\ ゜o゜)ノ
+Use your hands or your face to distort the type. Walk away from the camera and watch the type disappear. 
+Try it out [here](https://pose2.yee.gd) or remix the code [on Glitch](https://glitch.com/edit/#!/pose2).
