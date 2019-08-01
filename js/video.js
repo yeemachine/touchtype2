@@ -3,25 +3,35 @@ const videoElement = document.querySelector('video');
 getStream()
 
 function getStream() {
-  if (window.stream) {
-    window.stream.getTracks().forEach(function(track) {
-      track.stop();
+//   if (window.stream) {
+//     window.stream.getTracks().forEach(function(track) {
+//       track.stop();
+//     });
+//   }
+
+  const constraints = { video: { facingMode: "user" }, audio: false }
+
+
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia(constraints).then((stream)=>{
+        gotStream(stream)
     });
-  }
-
-  const constraints = {
-    video: true
-  };
-
-  navigator.mediaDevices.getUserMedia(constraints)
-    .then(gotStream)
-    .catch(handleError);
 }
 
+
+}
+
+
+
+
 function gotStream(stream) {
+  
   console.log(videoElement,stream)
-  window.stream = stream; // make stream available to console
+  // window.stream = stream; // make stream available to console
   videoElement.srcObject = stream;
+  // videoElement.play()
   let b = setInterval(()=>{
     if(videoElement.readyState >= 3){
       poseNetINIT()
