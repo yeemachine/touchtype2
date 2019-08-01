@@ -32,6 +32,8 @@ function modelLoaded() {
         let leftWrist = person.leftWrist
         let rightWrist = person.rightWrist
         let nose = person.nose
+        let leftEye = person.leftEye
+        let rightEye = person.rightEye
 
         let leftWristScaled = {
           x:scale(leftWrist.x,video.width,video.clientWidth),
@@ -48,7 +50,17 @@ function modelLoaded() {
           y:scale(nose.y,video.height,video.clientHeight)
         }
         
-        scaledPoints.push(leftWristScaled,rightWristScaled,noseScaled)
+        let leftEyeScaled = {
+          x:scale(leftEye.x,video.width,video.clientWidth),
+          y:scale(leftEye.y,video.height,video.clientHeight)
+        }
+        
+         let rightEyeScaled = {
+          x:scale(rightEye.x,video.width,video.clientWidth),
+          y:scale(rightEye.y,video.height,video.clientHeight)
+        }
+        
+        scaledPoints.push(leftWristScaled,rightWristScaled,leftEyeScaled,rightEyeScaled)
         
       }  
     })
