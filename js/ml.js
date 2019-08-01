@@ -1,3 +1,4 @@
+
 const video = document.querySelector("video");
 
 const options = {
