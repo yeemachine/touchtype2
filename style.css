@@ -1,0 +1,37 @@
+/* CSS files add styling rules to your content */
+@font-face {
+    font-family: 'Akademie';
+    src: url('https://cdn.glitch.com/a634d84f-6e3f-45f4-a7ee-ac2a661cbbe2%2FNB%20Akademie%20Bold.ttf?v=1563380381679');
+}
+
+body {
+/*   font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif; */
+  margin: 0;
+  padding:0;
+  background:rgb(76,0,153);
+}
+
+h1 {
+  font-style: italic;
+  color: #373fff;
+}
+
+#textGenerator{
+  display:none;
+  letter-spacing:.075em
+}
+video{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  margin:auto;
+  pointer-events:none;
+  min-width:100vw;
+  min-height:100vh;
+  width:100vw;
+  height:auto;
+  transform:scale(-1,1);
+  opacity:0.1;
+  background:rgb(76,0,153);
+/*   z-index:-1;
+   */
+}
