@@ -1,6 +1,6 @@
 Type Experiments with PoseNet and PIXI
 =================
-![Touching Type](https://cdn.glitch.com/2265e14a-84d1-435d-b7d7-6cf94be2325b%2Fhands.gif)
+![Touching Type](https://cdn.glitch.com/4d39133e-b3b7-4768-b5c7-ea33124bc0dd%2Fezgif-1-225e7012fcb4.gif)
 <!-- ![Intro to PoseNet](https://cdn.glitch.com/2265e14a-84d1-435d-b7d7-6cf94be2325b%2Fintro.gif)
  -->
 An interactive type projection that utilizes simple body tracking from [Posenet](https://github.com/tensorflow/tfjs-models/tree/master/posenet)
