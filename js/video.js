@@ -15,8 +15,11 @@ function getStream() {
 // Get access to the camera!
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     // Not adding `{ audio: true }` since we only want video now
+    console.log(navigator.getUserMedia)
     navigator.mediaDevices.getUserMedia(constraints).then((stream)=>{
-        gotStream(stream)
+      gotStream(stream)
+    }).catch(err=>{
+      alert(err)
     });
 }
 
