@@ -9,7 +9,7 @@ function getStream() {
 //     });
 //   }
 
-  const constraints = { video: { facingMode: "user" }, audio: false }
+const constraints = { video: { facingMode: "user" }, audio: false }
 
 
 // Get access to the camera!
