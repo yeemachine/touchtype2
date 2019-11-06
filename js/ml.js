@@ -26,9 +26,21 @@ function modelLoaded() {
   if(results.length>0){
     flock.toPoint = true
     let scaledPoints = []
+    let skeletonPoints = []
     results.forEach((e,i)=>{
       let person = e.pose
-      console.log(person)
+      let keypoints = e.pose.keypoints
+      let keypointsScaled = {}
+      
+      keypoints.forEach((e,i)=>{
+        keypointsScaled[e.part]={
+          x:scale(e.position.x,video.width,video.clientWidth),
+          y:scale(e.position.y,video.height,video.clientHeight)
+        }
+      })
+      
+      skeletonPoints.push(keypointsScaled)
+      console.log(skeletonPoints)
       if(person.score > 0.05){
         
         let leftWrist = person.leftWrist
