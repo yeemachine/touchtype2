@@ -6,7 +6,9 @@
     SPEEDY = 3,
     ACCELERATIONX = 4,
     ACCELERATIONY = 5,
-    DIRECTION = 6
+    DIRECTION = 6,
+    REACHED = 7,
+    LENGTH = 8
 
   class Flock {
     constructor(opts){
@@ -36,9 +38,9 @@
 
         if (this.opts.startPositions) {
           this.boids[i] = [
-            this.opts.startPositions[i][0], this.opts.startPositions[i][1], 0, 0, 0, 0];
+            this.opts.startPositions[i][0], this.opts.startPositions[i][1], 0, 0, 0, 0, 0, false, 1000];
         } else {
-          this.boids[i] = [Math.random() * 100, Math.random() * 100, 0, 0, 0, 0];
+          this.boids[i] = [Math.random() * 100, Math.random() * 100, 0, 0, 0, 0, 0, false, 1000];
         }
         
       }
@@ -72,10 +74,11 @@
 
       
       if(this.toPoint && this.clock < 1){
-        this.clock += 0.00125 
+        this.clock += 0.00085 
       }else{
         this.clock = 0
-        let textpoints = (this.wordSwitch) ? generate('Goodbye',18,6) : generate('Hello',18,6)
+        let fontSize = 10 + window.innerWidth/200
+        let textpoints = (this.wordSwitch) ? generate('Goodbye',fontSize,6) : generate('Hello',fontSize,6)
         this.pointTargets = textpoints
         this.wordSwitch = !this.wordSwitch
       }
@@ -86,44 +89,9 @@
         cforceX = 0; cforceY = 0;
         aforceX = 0; aforceY = 0;
         currPos = boids[current];
+   
+        // FLOCKING -------------------------------------------------------
         
-        // Attract to textpoint
-        if(this.toPoint === true && this.pointTargets.points.length >= (size-current)){
-          let newPoint = this.pointTargets.points[size-current-1]
-          let centeredX = newPoint.x - (this.pointTargets.width/2)
-          let centeredY = newPoint.y - (this.pointTargets.height/2)
-          spareX = currPos[0] - centeredX
-          spareY = currPos[1] - centeredY
-          distSquared = spareX * spareX + spareY * spareY
-          length = sqrt(spareX * spareX + spareY * spareY);
-          let aForce = 20
-          
-          // boids[current][SPEEDX] -= (aForce * spareX / length) || 0;
-          boids[current][SPEEDX] = (length <= .1) ? 0 : (boids[current][SPEEDX] - (aForce * spareX / length)); 
-          boids[current][SPEEDY] = (length <= .1) ? 0 : (boids[current][SPEEDY] - (aForce * spareY / length)); 
-
-          // boids[current][SPEEDY] -= (aForce * spareY / length) || 0;
-        }
-        
-        
-        // Attractors
-        target = attractorCount;
-        while (target--) {
-          var attractor = attractors[target];
-          spareX = currPos[0] - attractor.x;
-          spareY = currPos[1] - attractor.y;
-          distSquared = spareX * spareX + spareY * spareY;
-
-          if (distSquared < attractor.r * attractor.r) {
-            length = sqrt(spareX * spareX + spareY * spareY);
-            boids[current][SPEEDX] -= (attractor.f * spareX / length) || 0;
-            boids[current][SPEEDY] -= (attractor.f * spareY / length) || 0;
-          }
-        }
-        
-
-        
-        // target = (this.toPoint) ? size-this.pointTargets.points.length : size;
         target = size
         while (target--) {
           if (target === current) {continue; }
@@ -145,25 +113,66 @@
             }
           }
         }
-        
 
-        // Separation
+        // Separation Vector
         length = sqrt(sforceX * sforceX + sforceY * sforceY);
         boids[current][ACCELERATIONX] += (sepForce * sforceX / length) || 0;
         boids[current][ACCELERATIONY] += (sepForce * sforceY / length) || 0;
-        // Cohesion
+        // Cohesion Vector
         length = sqrt(cforceX * cforceX + cforceY * cforceY);
         boids[current][ACCELERATIONX] -= (cohForce * cforceX / length) || 0;
         boids[current][ACCELERATIONY] -= (cohForce * cforceY / length) || 0;
-        // Alignment
+        // Alignment Vector
         length = sqrt(aforceX * aforceX + aforceY * aforceY);
         boids[current][ACCELERATIONX] -= (aliForce * aforceX / length) || 0;
         boids[current][ACCELERATIONY] -= (aliForce * aforceY / length) || 0;
+        
+        //------------------------------------------------------------------
+        
+        // MOVE TO TEXTPOINT
+        if(this.toPoint === true && this.pointTargets.points.length >= (size-current)){
+          let newPoint = this.pointTargets.points[size-current-1]
+          let centeredX = newPoint.x - (this.pointTargets.width/2)
+          let centeredY = newPoint.y - (this.pointTargets.height/2)
+          spareX = currPos[0] - centeredX
+          spareY = currPos[1] - centeredY
+          distSquared = spareX * spareX + spareY * spareY
+          length = sqrt(spareX * spareX + spareY * spareY);
+          let aForce = 20
+          
+          boids[current][SPEEDX] = (length <= 2) ? 0 : (boids[current][SPEEDX] - (aForce * spareX / length)); 
+          boids[current][SPEEDY] = (length <= 2) ? 0 : (boids[current][SPEEDY] - (aForce * spareY / length)); 
+          boids[current][ACCELERATIONX] = (length <= 2) ? 0 : boids[current][ACCELERATIONX]
+          boids[current][ACCELERATIONY] = (length <= 2) ? 0 : boids[current][ACCELERATIONY]
+          
+          boids[current][REACHED] = (length <= 2) ? true : false
+          boids[current][LENGTH] = (length <= 2) ? 0 : length
+          
+          
+        }else{
+          boids[current][REACHED] = false
+        }
+        
+        // ATTRACTORS
+        target = attractorCount;
+        while (target--) {
+          var attractor = attractors[target];
+          spareX = currPos[0] - attractor.x;
+          spareY = currPos[1] - attractor.y;
+          distSquared = spareX * spareX + spareY * spareY;
+
+          if (distSquared < attractor.r * attractor.r) {
+            length = sqrt(spareX * spareX + spareY * spareY);
+            boids[current][SPEEDX] -= (attractor.f * spareX / length) || 0;
+            boids[current][SPEEDY] -= (attractor.f * spareY / length) || 0;
+          }
+        }
+        
       }
+      
       current = size;
 
-      // Apply speed/acceleration for
-      // this tick
+      // Apply speed/acceleration for this tick
       let ratio;
       while (current--) {
         if (accelerationLimit) {

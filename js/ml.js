@@ -28,7 +28,8 @@ function modelLoaded() {
     let scaledPoints = []
     results.forEach((e,i)=>{
       let person = e.pose
-      if(person.score > 0.3){
+      console.log(person)
+      if(person.score > 0.05){
         
         let leftWrist = person.leftWrist
         let rightWrist = person.rightWrist
@@ -60,6 +61,7 @@ function modelLoaded() {
           x:scale(rightEye.x,video.width,video.clientWidth),
           y:scale(rightEye.y,video.height,video.clientHeight)
         }
+    
         
         scaledPoints.push(leftWristScaled,rightWristScaled,leftEyeScaled,rightEyeScaled)
         
@@ -90,12 +92,12 @@ const generateAttractor = (arr) => {
        x:e.x, 
        y:e.y, 
        r:50, 
-       f:-100
+       f:-80
       },
       {
        x:e.x, 
        y:e.y, 
-       r:100, 
+       r:70, 
        f:20
       });
   })
