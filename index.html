@@ -10,6 +10,17 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Serif&display=swap" rel="stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      WebFont.load({
+        custom: {
+          families: ['Nicholson'],
+          urls: ['/style.css']
+        },
+        fontactive: function('Nicholson', 'normal') {
+          console.log('works')
+        },
+      });
+    </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
@@ -25,17 +36,6 @@
     <script src="js/video.js" defer></script>
     <script src="js/classBoids.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script>
-      WebFont.load({
-        custom: {
-          families: ['Nicholson'],
-          urls: ['/style.css']
-        },
-        fontactive: function('Nicholson', 'normal') {
-          init()
-        },
-      });
-    </script>
   </head>
   <body>
     <canvas id="textGenerator"></canvas>
