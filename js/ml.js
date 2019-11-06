@@ -43,39 +43,39 @@ function modelLoaded() {
       console.log(skeletonPoints)
       if(person.score > 0.05){
         
-        let leftWrist = person.leftWrist
-        let rightWrist = person.rightWrist
-        let nose = person.nose
-        let leftEye = person.leftEye
-        let rightEye = person.rightEye
+//         let leftWrist = person.leftWrist
+//         let rightWrist = person.rightWrist
+//         let nose = person.nose
+//         let leftEye = person.leftEye
+//         let rightEye = person.rightEye
 
-        let leftWristScaled = {
-          x:scale(leftWrist.x,video.width,video.clientWidth),
-          y:scale(leftWrist.y,video.height,video.clientHeight)
-        }
+//         let leftWristScaled = {
+//           x:scale(leftWrist.x,video.width,video.clientWidth),
+//           y:scale(leftWrist.y,video.height,video.clientHeight)
+//         }
         
-        let rightWristScaled = {
-          x:scale(rightWrist.x,video.width,video.clientWidth),
-          y:scale(rightWrist.y,video.height,video.clientHeight)
-        }
+//         let rightWristScaled = {
+//           x:scale(rightWrist.x,video.width,video.clientWidth),
+//           y:scale(rightWrist.y,video.height,video.clientHeight)
+//         }
         
-        let noseScaled = {
-          x:scale(nose.x,video.width,video.clientWidth),
-          y:scale(nose.y,video.height,video.clientHeight)
-        }
+//         let noseScaled = {
+//           x:scale(nose.x,video.width,video.clientWidth),
+//           y:scale(nose.y,video.height,video.clientHeight)
+//         }
         
-        let leftEyeScaled = {
-          x:scale(leftEye.x,video.width,video.clientWidth),
-          y:scale(leftEye.y,video.height,video.clientHeight)
-        }
+//         let leftEyeScaled = {
+//           x:scale(leftEye.x,video.width,video.clientWidth),
+//           y:scale(leftEye.y,video.height,video.clientHeight)
+//         }
         
-         let rightEyeScaled = {
-          x:scale(rightEye.x,video.width,video.clientWidth),
-          y:scale(rightEye.y,video.height,video.clientHeight)
-        }
+//          let rightEyeScaled = {
+//           x:scale(rightEye.x,video.width,video.clientWidth),
+//           y:scale(rightEye.y,video.height,video.clientHeight)
+//         }
     
         
-        scaledPoints.push(leftWristScaled,rightWristScaled,leftEyeScaled,rightEyeScaled)
+        scaledPoints.push(keypointsScaled.leftWrist,keypointsScaled.rightWrist,keypointsScaled.leftEye,keypointsScaled.rightEye)
         
       }  
     })
