@@ -188,4 +188,6 @@ const random = (from, to) => {
   return (Math.random() * (to - from) + from);
 }
 
-init();
+document.fonts.load('10pt "IBM Plex Serif"').then(()=>{
+  init();
+})
