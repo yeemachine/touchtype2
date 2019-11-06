@@ -190,6 +190,6 @@ const random = (from, to) => {
   return (Math.random() * (to - from) + from);
 }
 
-// document.fonts.load('10pt "Nicholson"').then(()=>{
-//   init();
-// })
+document.fonts.load('10pt "Nicholson"').then(()=>{
+  init();
+})
