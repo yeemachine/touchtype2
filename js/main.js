@@ -117,25 +117,27 @@ const createFlock = () => {
 }
 
 const render = () => {
-  flock.tick();
+  if(flock !== undefined){
+    flock.tick();
 
-  // stats.update();
-  var boidData = flock.boids;
+    // stats.update();
+    var boidData = flock.boids;
 
-  for (var i = 0, l = boidData.length, x, y; i < l; i += 1) {
-    x = boidData[i][0]; y = boidData[i][1];
-    boidData[i][0] = x > boidsLimit.right ? boidsLimit.left : -x > boidsLimit.right ? boidsLimit.right : x;
-    boidData[i][1] = y > boidsLimit.bottom ? boidsLimit.top : -y > boidsLimit.bottom ? boidsLimit.bottom : y;
-    items[i].position.x = x;
-    items[i].position.y = y;
-    items[i].rotation =  boidData[i][6];
-    items[i].style.fontFamily = 'Nicholson'
-    
-    items[i].tint = (boidData[i][7] === true) ? 0xff0000 : 0xffffff
-    
+    for (var i = 0, l = boidData.length, x, y; i < l; i += 1) {
+      x = boidData[i][0]; y = boidData[i][1];
+      boidData[i][0] = x > boidsLimit.right ? boidsLimit.left : -x > boidsLimit.right ? boidsLimit.right : x;
+      boidData[i][1] = y > boidsLimit.bottom ? boidsLimit.top : -y > boidsLimit.bottom ? boidsLimit.bottom : y;
+      items[i].position.x = x;
+      items[i].position.y = y;
+      items[i].rotation =  boidData[i][6];
+      items[i].style.fontFamily = 'Nicholson'
+
+      items[i].tint = (boidData[i][7] === true) ? 0xff0000 : 0xffffff
+
+    }
+
+    renderer.render(stage);
   }
-
-  renderer.render(stage);
   
   requestAnimationFrame(render);
 }
@@ -188,4 +190,6 @@ const random = (from, to) => {
   return (Math.random() * (to - from) + from);
 }
 
-init();
+document.fonts.load('10pt "IBM Plex Serif"').then(()=>{
+  init();
+})
